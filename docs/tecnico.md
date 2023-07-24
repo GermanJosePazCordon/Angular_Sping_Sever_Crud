@@ -70,6 +70,7 @@ El cliente cuenta con 4 componentes, los cuales son: clientes, cuentas, chequera
 ### Estructura del servidor
 
 ![](img/java.png)
+
 El flujo del backend cuenta con 7 capas, las cuales son: controlador, servicio, repositorio, modelo, entidad, request y response. La capa del controlador se encarga de recibir las peticiones del cliente y enviarlas a la capa del servicio. La capa del servicio se encarga de procesar las peticiones y enviarlas a la capa del repositorio. La capa del repositorio se encarga de realizar las consultas a la base de datos y enviarlas a la capa del servicio. Además, se cuenta con una capa de modelo que se utiliza para el manejo de los datos y con una capa de entidad que se utiliza para el mapeo de los datos de la base de datos. La capa de request y response se utilizand como mapeo de los datos que se envían y reciben del cliente, de esta manera se pueden manejar de mejor manera los parametros de las peticiones y las respuestas a las mismas.
 
 También, se cuenta con un archivo de configuración de la base de datos. Este archivo contiene la configuración de la base de datos y la conexión a la misma. Para la conexión a la base de datos se utilizó el módulo de Spring Data JPA. Se configuraron CORS para permitir el intercambio de recursos entre el cliente y el servidor. Se cuetna con un dockerfile para la creación de la imagen del servidor. Este archivo contiene la configuración de la imagen del servidor y la descarga de las dependencias necesarias para su ejecución.
