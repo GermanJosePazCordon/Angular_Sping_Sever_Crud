@@ -1,0 +1,17 @@
+server:
+  port: 9000
+spring:
+  application:
+    name: spring-boot-rest-api
+  datasource:
+    url: jdbc:sqlserver://34.125.83.182:1433;databaseName=dbBanco;encrypt=true;trustServerCertificate=true
+    username: sa
+    password: Mieles123.
+    driver-className: com.microsoft.sqlserver.jdbc.SQLServerDriver
+  jpa:
+    generate-ddl: false
+    hibernate:
+      ddl-auto: none
+      show-sql: false
+    open-in-view: true
+    database-platform: org.hibernate.dialect.SQLServer2012Dialect

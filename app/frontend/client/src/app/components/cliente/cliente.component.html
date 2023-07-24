@@ -1,0 +1,224 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-12">
+      <h1>Manejo de Clientes</h1>
+      <br>
+      <ul>
+        <li>
+          <button type="button" class="btn btn-info" (click)="read()">Mostrar Clientes</button> 
+        </li>
+        <br>
+        <li>
+          <button type="button" class="btn btn-info" (click)="showCreate()">Crear Cliente</button> 
+        </li>
+      </ul>
+    </div>
+  <div class="row">
+    <div class="col-md-12">
+
+        <!-- Table-->
+        <div *ngIf="visibleTable">
+        <table class="table table-hover" >
+          <tbody>
+            <tr class="table-dark">
+              <th scope="row">dpi</th>
+              <td>Nombre</td>
+              <td>Telfono</td>
+              <td>Genero</td>
+              <td>Direccion</td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr *ngFor="let row of rows; let rowIndex = index" class="table-primary">
+              <th scope="row">{{ row["dpi"] }}</th>
+              <td>{{ row["nombre"] }}</td>
+              <td>{{ row["telefono"] }}</td>
+              <td>{{ row["genero"] }}</td>
+              <td>{{ row["direccion"] }}</td>
+              <td>
+                <button type="button" class="btn btn-info" (click)="showUpdate(rowIndex)">Modificar</button> 
+              </td>
+              <td>
+                <button type="button" class="btn btn-danger" (click)="delete(rowIndex)">X</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+    </div>
+
+    <!-- Create --> 
+    <div class="row">
+      <div class="col-md-12">
+          <div *ngIf="visibleCreate">
+
+              <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+                  <div class="btn-group me-2" role="group" aria-label="First group">
+
+                    <div class="card text-white bg-dark mb-3" style="max-width: 20rem;">
+                      <div class="card-body">
+                          <div class="form-group">
+                              <form autocomplete="off" style="font-size: x-large;">
+                                  <label for="lblastname" class="form-label mt-4" style="margin-bottom: 10px;">DPI</label>
+                                  <input type="number" min="0" class="form-control" id="dpi" placeholder="Ingrese el dpi" size="22" style="height: 8%;" #dpiCreate>
+                              </form>
+                          </div>
+                      </div>
+                  </div>
+
+                      <div class="card text-white bg-dark mb-3" style="max-width: 20rem;">
+                          <div class="card-body">
+                              <div class="form-group">
+                                  <form autocomplete="off" style="font-size: x-large;">
+                                      <label for="lblastname" class="form-label mt-4" style="margin-bottom: 10px;">Nombre</label>
+                                      <input type="text" class="form-control" id="nombre" placeholder="Ingrese el nombre" size="22" style="height: 8%;" #nombreCreate>
+                                  </form>
+                              </div>
+                          </div>
+                      </div>
+
+                      <div class="card text-white bg-dark mb-3" style="max-width: 20rem;">
+                        <div class="card-body">
+                            <div class="form-group">
+                                <form autocomplete="off" style="font-size: x-large;">
+                                    <label for="lblastname" class="form-label mt-4" style="margin-bottom: 10px;">Genero</label>
+                                    <select class="form-select" id="exampleSelect1" #generoCreate>
+                                      <option>F</option>
+                                      <option>M</option>
+                                      <option>O</option>
+                                    </select>
+                                    <button type="button" class="btn btn-outline-light" style="margin-left: 5%; margin-top: 30%;" (click)="create(dpiCreate,nombreCreate, telefonoCreate, generoCreate, direccionCreate)">
+                                      Añadir
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                      <div class="card text-white bg-dark mb-3" style="max-width: 20rem;">
+                          <div class="card-body">
+                              <div class="form-group">
+                                  <form autocomplete="off" style="font-size: x-large;">
+                                      <label for="lblastname" class="form-label mt-4" style="margin-bottom: 10px;">Telefono</label>
+                                      <input type="text" class="form-control" id="telefono" placeholder="Ingrese el telefono" size="22" style="height: 8%;" #telefonoCreate>
+                                  </form>
+                                  
+                              </div>
+                          </div>
+                      </div>
+
+                      
+
+                      <div class="card text-white bg-dark mb-3" style="max-width: 20rem;">
+                          <div class="card-body">
+                              <div class="form-group">
+                                  <form autocomplete="off" style="font-size: x-large;">
+                                      <label for="lblastname" class="form-label mt-4" style="margin-bottom: 10px;">Dirección</label>
+                                      <input type="text" class="form-control" id="direccion" placeholder="Ingrese la direccion" size="22" style="height: 8%;" #direccionCreate>
+                                  </form>
+                              </div>
+                          </div>
+                      </div>
+                      
+                  </div>
+                </div>
+          </div>
+      </div>
+    </div>
+
+    <!-- Update --> 
+    <div class="row">
+      <div class="col-md-12">
+          <div *ngIf="visibleUpdate">
+
+              <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+                  <div class="btn-group me-2" role="group" aria-label="First group">
+
+                      <div class="card text-white bg-dark mb-3" style="max-width: 20rem;">
+                          <div class="card-body">
+                              <div class="form-group">
+                                  <form autocomplete="off" style="font-size: x-large;">
+                                      <label for="lblastname" class="form-label mt-4" style="margin-bottom: 10px;">Nombre</label>
+                                      <input type="text" class="form-control" id="nombre" placeholder="Ingrese el nombre" size="22" style="height: 8%;" #nombreUpdate value="{{clienteModel.nombre}}">
+                                  </form>
+                              </div>
+                          </div>
+                      </div>
+
+                      <div class="card text-white bg-dark mb-3" style="max-width: 20rem;">
+                          <div class="card-body">
+                              <div class="form-group">
+                                  <form autocomplete="off" style="font-size: x-large;">
+                                      <label for="lblastname" class="form-label mt-4" style="margin-bottom: 10px;">Telefono</label>
+                                      <input type="text" class="form-control" id="telefono" placeholder="Ingrese el telefono" size="22" style="height: 8%;" #telefonoUpdate value="{{clienteModel.telefono}}">
+                                  </form>
+                                  <button type="button" class="btn btn-outline-light" style="margin-left: 23%; margin-top: 30%;" (click)="update(nombreUpdate, telefonoUpdate, generoUpdate, direccionUpdate)">
+                                    Actualizar
+                                  </button>
+                              </div>
+                          </div>
+                      </div>
+
+                      <div class="card text-white bg-dark mb-3" style="max-width: 20rem;">
+                          <div class="card-body">
+                              <div class="form-group">
+                                  <form autocomplete="off" style="font-size: x-large;">
+                                      <label for="lblastname" class="form-label mt-4" style="margin-bottom: 10px;">Genero</label>
+                                      <select class="form-select" id="exampleSelect1" #generoUpdate>
+                                        <option>F</option>
+                                        <option>M</option>
+                                        <option>O</option>
+                                      </select>
+                                  </form>
+                                  
+                              </div>
+                          </div>
+                      </div>
+
+                      <div class="card text-white bg-dark mb-3" style="max-width: 20rem;">
+                          <div class="card-body">
+                              <div class="form-group">
+                                  <form autocomplete="off" style="font-size: x-large;">
+                                      <label for="lblastname" class="form-label mt-4" style="margin-bottom: 10px;">Dirección</label>
+                                      <input type="text" class="form-control" id="direccion" placeholder="Ingrese la direccion" size="22" style="height: 8%;" #direccionUpdate value="{{clienteModel.direccion}}">
+                                  </form>
+                              </div>
+                          </div>
+                      </div>
+                      
+                  </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+  </div>
+</div>
+
+  <!-- Table Cancelado-->
+  <div *ngIf="visibleTableCancelada">
+    <div class="row">
+        <div class="col-md-12">
+            <br><br><br>
+          <h1>Clientes Cancelados</h1>
+        </div>
+    </div>
+      
+    <table class="table table-hover" >
+        <tbody>
+          <tr class="table-dark">
+            <th scope="row">dpi</th>
+            <td>Nombre</td>
+            <td>Telfono</td>
+            <td>Genero</td>
+            <td>Direccion</td>
+          </tr>
+          <tr *ngFor="let row of canceladas; let rowIndex = index" class="table-primary">
+            <th scope="row">{{ row["dpi"] }}</th>
+            <td>{{ row["nombre"] }}</td>
+            <td>{{ row["telefono"] }}</td>
+            <td>{{ row["genero"] }}</td>
+            <td>{{ row["direccion"] }}</td>
+          </tr>
+        </tbody>
+      </table>
+</div>

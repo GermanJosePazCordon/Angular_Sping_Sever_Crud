@@ -1,0 +1,154 @@
+<div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <h1>Manejo de Chequeras</h1>
+        <br>
+        <ul>
+          <li>
+            <button type="button" class="btn btn-info" (click)="read()">Mostrar Chequeras</button> 
+          </li>
+          <br>
+          <li>
+            <button type="button" class="btn btn-info" (click)="showCreate()">Crear Chequeras</button> 
+          </li>
+        </ul>
+      </div>
+    <div class="row">
+      <div class="col-md-12">
+  
+          <!-- Table-->
+          <div *ngIf="visibleTable">
+          <table class="table table-hover" >
+            <tbody>
+              <tr class="table-dark">
+                <th scope="row">ID</th>
+                <td>Fecha de emisión</td>
+                <td>Cantidad</td>
+                <td>ID cuenta</td>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr *ngFor="let row of rows; let rowIndex = index" class="table-primary">
+                <th scope="row">{{ row["id_chequera"] }}</th>
+                <td>{{ row["fecha_emision"] }}</td>
+                <td>{{ row["cantidad"] }}</td>
+                <td>{{ row["id_cuenta"] }}</td>
+                <td>
+                  <button type="button" class="btn btn-info" (click)="showUpdate(rowIndex)">Agregar cheques</button> 
+                </td>
+                <td>
+                  <button type="button" class="btn btn-danger" (click)="delete(rowIndex)">X</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+      </div>
+  
+      <!-- Create --> 
+      <div class="row">
+        <div class="col-md-12">
+            <div *ngIf="visibleCreate">
+  
+                <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+                    <div class="btn-group me-2" role="group" aria-label="First group">
+  
+                      <div class="card text-white bg-dark mb-3" style="max-width: 20rem;">
+                        <div class="card-body">
+                            <div class="form-group">
+                                <form autocomplete="off" style="font-size: x-large;">
+                                    <label for="lblastname" class="form-label mt-4" style="margin-bottom: 10px;">Fecha de emisión</label>
+                                    <input type="date" class="form-control" id="dpi" placeholder="fecha: yyyy-mm-dd" size="22" style="height: 8%;" #fechaCreate>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+  
+                        <div class="card text-white bg-dark mb-3" style="max-width: 20rem;">
+                            <div class="card-body">
+                                <div class="form-group">
+                                    <form autocomplete="off" style="font-size: x-large;">
+                                        <label for="lblastname" class="form-label mt-4" style="margin-bottom: 10px;">Cantidad</label>
+                                        <input type="number" min="1" class="form-control" id="nombre" placeholder="Ingrese el cantidad" size="22" style="height: 8%;" #cantidadCreate>
+                                    </form>
+                                    <button type="button" class="btn btn-outline-light" style="margin-left: 23%; margin-top: 30%;" (click)="create(fechaCreate, cantidadCreate, cuentaCreate)">
+                                        Añadir Cuenta
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+  
+                        <div class="card text-white bg-dark mb-3" style="max-width: 20rem;">
+                            <div class="card-body">
+                                <div class="form-group">
+                                    <form autocomplete="off" style="font-size: x-large;">
+                                        <label for="lblastname" class="form-label mt-4" style="margin-bottom: 10px;">ID cuenta</label>
+                                        <input type="number" min="0" class="form-control" id="telefono" placeholder="Ingrese el ID de la cuenta" size="22" style="height: 8%;" #cuentaCreate>
+                                    </form>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                  </div>
+            </div>
+        </div>
+      </div>
+  
+      <!-- Update --> 
+      <div class="row">
+        <div class="col-md-12">
+            <div *ngIf="visibleUpdate">
+  
+                <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+                    <div class="btn-group me-2" role="group" aria-label="First group">
+  
+                        <div class="card text-white bg-dark mb-3" style="max-width: 20rem;">
+                            <div class="card-body">
+                                <div class="form-group">
+                                    <form autocomplete="off" style="font-size: x-large;">
+                                        <label for="lblastname" class="form-label mt-4" style="margin-bottom: 10px;">Cantidad</label>
+                                        <input type="number" class="form-control" id="genero" placeholder="Ingrese la cantidad a agregar" size="22" style="height: 8%;" #cantidadUpdate>
+                                    </form>
+                                    <button type="button" class="btn btn-outline-light" style="margin-left: 23%; margin-top: 30%;" (click)="update(cantidadUpdate)">
+                                      Actualizar
+                                  </button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  
+    </div>
+  </div>
+
+  <!-- Table Cancelado-->
+  <div *ngIf="visibleTableCancelada">
+    <div class="row">
+        <div class="col-md-12">
+            <br><br><br>
+          <h1>Cheques Canceladas</h1>
+        </div>
+    </div>
+      
+    <table class="table table-hover" >
+      <tbody>
+        <tr class="table-dark">
+          <th scope="row">ID</th>
+          <td>Fecha de emisión</td>
+          <td>Cantidad</td>
+          <td>ID cuenta</td>
+        </tr>
+        <tr *ngFor="let row of canceladas; let rowIndex = index" class="table-primary">
+          <th scope="row">{{ row["id_chequera"] }}</th>
+          <td>{{ row["fecha_emision"] }}</td>
+          <td>{{ row["cantidad"] }}</td>
+          <td>{{ row["id_cuenta"] }}</td>
+        </tr>
+      </tbody>
+    </table>
+</div>
