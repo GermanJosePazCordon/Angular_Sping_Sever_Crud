@@ -50,16 +50,3 @@ CREATE TABLE cheque(
     FOREIGN KEY (id_chequera) REFERENCES chequera(id_chequera)
 );
 GO
-
-UPDATE cliente SET estado = 'A'
-
-UPDATE cuenta SET estado = 'A'
-
-UPDATE chequera SET estado = 'A'
-
-UPDATE cheque SET estado = 'A'
-
-SELECT * FROM chequera
-
-select * from cliente
-select * from cuenta
